@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Welcome Hackers!";
+
+    DateTime Now = DateTime.Now;
+    DateTime NextMeetup = new DateTime(2013, 1, 8).AddHours(18);
+    while (NextMeetup < Now){
+        NextMeetup = NextMeetup.AddDays(14);
+    }
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+                The goal of this group is to establish a cross generational technical community in our region of Maine.
+            </p>
+        </div>
+    </section>
+}
+<article>
+    <p>
+        The group is targeted toward technical enthusiasts in the area of Maine roughly around the following towns:  Bangor & Monroe.
+        We welcome any and all technical interests whether you're into software, hardware, networking, or mobile app development.  
+    </p>
+    <p>Next meeting:
+        <ul>
+            <li><mark title="Check the meet group to be sure!">@NextMeetup.ToLongDateString() 6pm @("@") <dfn title="Previously Borders">Books-A-Million</dfn></mark> (<abbr title="Books-A-Million!">BAM!</abbr>) near the Bangor Mall in Bangor (<a title="Google Map: 116 Bangor Mall Blvd. Bangor, ME" href="http://maps.google.com/maps?q=116+Bangor+Mall+Boulevard%2C+Bangor%2C+ME">map</a>)</li>
+        </ul>
+    </p>
+    <p>
+        If you have any questions about the group <span title="Not Yet" style="text-decoration:line-through"> visit
+        <a href="/forums" title="Maine Hackers Forum" onclick="hackmaine.Sounds.PlayNo(); return false;">forums</a>, or</span> check out the links below.
+    </p>
+    <h3>For more information:</h3>
+    <ol class="round">
+        <li class="one">
+            <h5><a title="Maine Hacker Club" href="http://mainehackerclub.tumblr.com/">Tumblr…</a></h5>
+            The Tumblr page has archives and photos from previous meetups
+        </li>
+
+        <li class="two">
+            <h5><a title="Maine Hacker Club - Google Groups" href="https://groups.google.com/forum/?fromgroups#!forum/maine-hacker-club">Google Group…</a></h5>
+            Join the Maine Hacker Club Google group to network with other members.
+        </li>
+
+        <li class="three">
+            <h5><a title="Hacker Club (Bangor, ME) - Meetup" href="http://www.meetup.com/Hacker-Club/">Meetup…</a></h5>
+            Join the meetup group to find out when the next meeting is, and let everyone know you're coming.
+        </li>
+   
+            <li class="four">
+            <h5><a title="Maine Hacker Club on Twitter" href="https://twitter.com/mainehackerclub">Twitter…</a></h5>
+            Follow @("@")mainehackerclub on Twitter.
+        </li>
+    </ol>
+</article>
+<aside>
+    <h3>2012 Meetups</h3>
+    <ul>
+        <li><img title="24th Jul 2012: Hacking Arduino via Sketch IDE." src="~/Images/meetups/20120724_01t.jpg" /></li>
+        <li><img title="24th Jul 2012: Grokking memory corruption security exploits." src="~/Images/meetups/20120724_02t.jpg" /></li>
+        <li><img title="18th Sep 2012: Denis takes us through a “Electrical Circuits 101” " src="~/Images/meetups/20120918_01t.jpg" /></li>
+        <li><img title="2nd Oct 2012: Check out the nerd joy on @("@")zacheryschiller" src="~/Images/meetups/20121002_01t.jpg" /></li>
+        <li><img title="2nd Oct 2012: Join us for some hardware hacking." src="~/Images/meetups/20121002_02t.jpg" /></li>
+    </ul>
+</aside>
