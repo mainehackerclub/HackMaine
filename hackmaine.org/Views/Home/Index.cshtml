@@ -10,6 +10,9 @@
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
+            <div class="right">
+                <div class="g-plusone" data-size="medium" data-href="http://www.hackmaine.org"></div>
+            </div>
             <hgroup class="title">
                 <h1>@ViewBag.Title</h1>
                 <h2>@ViewBag.Message</h2>
@@ -53,7 +56,9 @@
    
             <li class="four">
             <h5><a title="Maine Hacker Club on Twitter" href="https://twitter.com/mainehackerclub">Twitter…</a></h5>
-            Follow @("@")mainehackerclub on Twitter.
+            Check out @("@")mainehackerclub on Twitter.<br />
+                <a href="https://twitter.com/mainehackerclub" class="twitter-follow-button" data-show-count="false">Follow @("@")mainehackerclub</a>
+                <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = "//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
         </li>
     </ol>
 </article>

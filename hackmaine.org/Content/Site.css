@@ -618,6 +618,10 @@ tr.pager td {
     padding: 0 0.25em 0 0;
 }
 
+/* Custom */
+.right {
+    float:right;
+}
 
 /********************
 *   Mobile Styles   *
@@ -792,4 +796,11 @@ tr.pager td {
         footer p {
             margin: 0;
         }
+
+    /* Custom */
+    /*.right {
+        float:inherit;
+        text-align:center;
+    }*/
+
 }
