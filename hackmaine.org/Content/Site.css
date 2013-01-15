@@ -623,6 +623,27 @@ tr.pager td {
     float:right;
 }
 
+.gallery {
+    padding: 5px;
+    /*background-color: #EEEEEE;*/
+    border: 3px ridge #C0C0C0;
+    text-align: center;
+}
+
+        .gallery ul li {
+            overflow: hidden;
+            padding: 5px 0 0 0;
+            margin: 3px;
+            border: 1px solid #000;
+        }
+
+            .gallery ul li p {
+                overflow: hidden;
+                padding: 5px;
+                margin: 0px 2px 2px 2px;
+                background-color: #fff;
+            }
+
 /********************
 *   Mobile Styles   *
 ********************/

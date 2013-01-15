@@ -17,6 +17,19 @@
     }
 };
 
+$(function () {
+    if ($.fancybox) {
+        // Default
+        $(".fancybox").fancybox({
+            type: 'image', openEffect: 'elastic', closeEffect: 'elastic', padding: '4',
+            helpers: {
+                title: { type: 'float' }
+            }
+        });
+    }
+});
+
+
 // Begin: Google Analytics
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-4082072-8']);

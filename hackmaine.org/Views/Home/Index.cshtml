@@ -23,6 +23,34 @@
         </div>
     </section>
 }
+@section scripts{
+    <script>
+        $(function () {
+            $(".gallery").jCarouselLite({
+                btnNext: ".mouseWheelButtons .vertical .next",
+                btnPrev: ".mouseWheelButtons .vertical .prev",
+                mouseWheel: true,
+                vertical: true,
+                visible: 2,
+                scroll: 1,
+                auto: 5000,
+                speed: 1500,
+                //circular: false
+            });
+        });
+
+        $('.gallery ul li img').each(function () {
+            var text = $(this).attr('title');
+            if (text.length && text.length > 0) {
+                var p = $('<p/>');
+                p.html(text);
+                $(this).closest('li').append(p);
+            }
+        });
+
+        // Twitter
+        !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = "//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");    </script>
+}
 <article>
     <p>
         The group is targeted toward technical enthusiasts in the area of Maine roughly around the following towns:  Bangor & Monroe.
@@ -58,17 +86,23 @@
             <h5><a title="Maine Hacker Club on Twitter" href="https://twitter.com/mainehackerclub">Twitter…</a></h5>
             Check out @("@")mainehackerclub on Twitter.<br />
                 <a href="https://twitter.com/mainehackerclub" class="twitter-follow-button" data-show-count="false">Follow @("@")mainehackerclub</a>
-                <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = "//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
         </li>
     </ol>
 </article>
 <aside>
-    <h3>2012 Meetups</h3>
-    <ul>
-        <li><img title="24th Jul 2012: Hacking Arduino via Sketch IDE." src="~/Images/meetups/20120724_01t.jpg" /></li>
-        <li><img title="24th Jul 2012: Grokking memory corruption security exploits." src="~/Images/meetups/20120724_02t.jpg" /></li>
-        <li><img title="18th Sep 2012: Denis takes us through a “Electrical Circuits 101” " src="~/Images/meetups/20120918_01t.jpg" /></li>
-        <li><img title="2nd Oct 2012: Check out the nerd joy on @("@")zacheryschiller" src="~/Images/meetups/20121002_01t.jpg" /></li>
-        <li><img title="2nd Oct 2012: Join us for some hardware hacking." src="~/Images/meetups/20121002_02t.jpg" /></li>
-    </ul>
+    <h3>Previous Meetups</h3>
+    <div class="gallery vertical">
+        <ul>
+            <li><a class="fancybox" rel="" href="~/Images/meetups/20120724_01.jpg">
+                <img title="24th Jul 2012: Hacking Arduino via Sketch IDE." src="~/Images/meetups/20120724_01t.jpg" /></a></li>
+            <li><a class="fancybox" rel="" href="~/Images/meetups/20120724_02.jpg">
+                <img title="24th Jul 2012: Grokking memory corruption security exploits." src="~/Images/meetups/20120724_02t.jpg" /></a></li>
+            <li><a class="fancybox" rel="" href="~/Images/meetups/20120918_01.jpg">
+                <img title="18th Sep 2012: Denis takes us through a “Electrical Circuits 101” " src="~/Images/meetups/20120918_01t.jpg" /></a></li>
+            <li><a class="fancybox" rel="" href="~/Images/meetups/20121002_01.jpg">
+                <img title="2nd Oct 2012: Check out the nerd joy on @("@")zacheryschiller" src="~/Images/meetups/20121002_01t.jpg" /></a></li>
+            <li><a class="fancybox" rel="" href="~/Images/meetups/20121002_02.jpg">
+                <img title="2nd Oct 2012: Join us for some hardware hacking." src="~/Images/meetups/20121002_02t.jpg" /></a></li>
+        </ul>
+    </div>
 </aside>
