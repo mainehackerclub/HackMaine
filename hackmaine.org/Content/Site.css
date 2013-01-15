@@ -630,19 +630,46 @@ tr.pager td {
     text-align: center;
 }
 
-        .gallery ul li {
-            overflow: hidden;
-            padding: 5px 0 0 0;
-            margin: 3px;
-            border: 1px solid #000;
+    .gallery ul li {
+        overflow: hidden;
+        padding: 5px 0 0 0;
+        margin: 3px;
+        border: 1px solid #000;
+    }
+
+        .gallery ul li img {
+            width: 200px;
+            height: 200px;
         }
 
-            .gallery ul li p {
-                overflow: hidden;
-                padding: 5px;
-                margin: 0px 2px 2px 2px;
-                background-color: #fff;
-            }
+        .gallery ul li p {
+            overflow: hidden;
+            padding: 5px;
+            margin: 0px 2px 2px 2px;
+            background-color: #fff;
+        }
+
+
+#mapBox{
+    width:600px;
+    height:500px;
+}
+
+.closeButton {
+    display: block;
+    position: relative;
+    left: 570px;
+    top: 20px;
+    cursor: pointer;
+    background-color: ButtonFace;
+    border: outset 3px ButtonHighlight;
+    width: 20px;
+    height: 20px;
+    padding: 3px;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+}
 
 /********************
 *   Mobile Styles   *
