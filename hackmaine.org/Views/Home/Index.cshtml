@@ -56,15 +56,26 @@
         The group is targeted toward technical enthusiasts in the area of Maine roughly around the following towns:  Bangor & Monroe.
         We welcome any and all technical interests whether you're into software, hardware, networking, or mobile app development.  
     </p>
-    <p>Next meeting:
+    Next meeting:
         <ul>
-            <li><mark title="Check the meet group to be sure!">@NextMeetup.ToLongDateString() 6pm @("@") <dfn title="Previously Borders">Books-A-Million</dfn></mark> (<abbr title="Books-A-Million!">BAM!</abbr>) near the Bangor Mall in Bangor (<a @*onclick="$('#mapBox').show();return false;" *@title="Google Map: 116 Bangor Mall Blvd. Bangor, ME" href="http://maps.google.com/maps?q=Books-A-Million&hl=en&sll=44.833246,-68.746305&sspn=0.011139,0.01678&t=m&z=16&iwloc=A">map</a>)</li>
+            <li><mark title="Check the meet group to be sure!">@NextMeetup.ToLongDateString() 6pm @("@") <dfn title="Previously Borders">Books-A-Million</dfn></mark> (<abbr title="Books-A-Million!">BAM!</abbr>) near the Bangor Mall in Bangor (<a onclick="ShowMap();return false;" title="Google Map: 116 Bangor Mall Blvd. Bangor, ME" href="http://maps.google.com/maps?q=Books-A-Million&hl=en&sll=44.833246,-68.746305&sspn=0.011139,0.01678&t=m&z=16&iwloc=A">map</a>)</li>
         </ul>
-@*    <div id="mapBox" style="display:none;">
+        <script>
+            var mapBuilt = false;
+            function ShowMap() {
+                $('#mapBox').show();
+                if (!mapBuilt) {
+                    var mapFrame = '<iframe width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?q=Books-A-Million&amp;hl=en&amp;sll=44.833246,-68.746305&amp;sspn=0.011139,0.01678&amp;t=h&amp;ie=UTF8&amp;hq=Books-A-Million&amp;hnear=&amp;cid=401696528683542693&amp;source=embed&amp;ll=44.840595,-68.745832&amp;spn=0.024344,0.051413&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe>';
+                    var largerLink= '<small><a href="http://maps.google.com/maps?q=Books-A-Million&amp;hl=en&amp;sll=44.833246,-68.746305&amp;sspn=0.011139,0.01678&amp;t=h&amp;ie=UTF8&amp;hq=Books-A-Million&amp;hnear=&amp;cid=401696528683542693&amp;source=embed&amp;ll=44.840595,-68.745832&amp;spn=0.024344,0.051413&amp;z=14&amp;iwloc=A" style="color:#0000FF;text-align:left">View Larger Map</a></small>';
+                    $('#mapBox').html($('#mapBox').html() + mapFrame + '<br/>' + largerLink);
+                    mapBuilt = true;
+                }
+            }
+        </script>
+
+    <div id="mapBox" style="display:none;">
         <div class="closeButton" onclick="$('#mapBox').hide();return false;">X</div>
-        <iframe width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=Books-A-Million&amp;hl=en&amp;sll=44.833246,-68.746305&amp;sspn=0.011139,0.01678&amp;t=h&amp;ie=UTF8&amp;hq=Books-A-Million&amp;hnear=&amp;cid=401696528683542693&amp;source=embed&amp;ll=44.840595,-68.745832&amp;spn=0.024344,0.051413&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe><br /><small><a href="https://maps.google.com/maps?q=Books-A-Million&amp;hl=en&amp;sll=44.833246,-68.746305&amp;sspn=0.011139,0.01678&amp;t=h&amp;ie=UTF8&amp;hq=Books-A-Million&amp;hnear=&amp;cid=401696528683542693&amp;source=embed&amp;ll=44.840595,-68.745832&amp;spn=0.024344,0.051413&amp;z=14&amp;iwloc=A" style="color:#0000FF;text-align:left">View Larger Map</a></small>
-    </div>*@
-    </p>
+    </div>
     <p>
         If you have any questions about the group <span title="Not Yet" style="text-decoration:line-through"> visit
         <a href="/forums" title="Maine Hackers Forum" onclick="hackmaine.Sounds.PlayNo(); return false;">forums</a>, or</span> check out the links below.
