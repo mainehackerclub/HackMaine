@@ -219,12 +219,12 @@ ul#menu {
 
         ul#menu li a {
             background: none;
-            color: #333;
+            color: #667;
             text-decoration: none;
         }
 
         ul#menu li a:hover {
-            color: #999;
+            color: #aab;
             text-decoration: none;
         }
 
@@ -737,10 +737,10 @@ tr.pager td {
             padding: 0;
         }
         ul#menu li a {
-            color: #333;
+            color: #667;
         }
         ul#menu li a:hover {
-            color: #999;
+            color: #aab;
         }
 
 

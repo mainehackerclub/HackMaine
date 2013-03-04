@@ -241,6 +241,7 @@
     <None Include="Properties\PublishProfiles\Web3.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="googlec7ce5d66feaa707c.html" />
+    <Content Include="Images\flyers\HackDay20130309.jpg" />
     <Content Include="Images\HackerClub.jpg" />
     <Content Include="Images\HackerClub_24.png" />
     <Content Include="Images\HackerClub_32.png" />

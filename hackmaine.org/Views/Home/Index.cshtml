@@ -12,18 +12,23 @@
 
 @{
     VenueInfo NextVenue = HomeController.MDMInfo;
-    
+
+
+    DateTime NextHackDayDate = new DateTime(2013, 3, 9, 9, 30, 0);
+    VenueInfo NextHackDayVenue = HomeController.UnitedWayInfo;
+
 }
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
             <div class="right">
-                <div class="g-plusone" data-size="medium" data-href="http://www.hackmaine.org"></div>
+                <div class="g-plusone" data-size="large" data-href="http://www.hackmaine.org"></div>
             </div>
             <hgroup class="title">
                 <h1>@ViewBag.Title</h1>
                 <h2>@ViewBag.Message</h2>
             </hgroup>
+            <div class="right"><a href="https://twitter.com/mainehackerclub" class="twitter-follow-button" data-show-count="false">Follow @("@")mainehackerclub</a></div>
             <p>
                 The goal of this group is to establish a cross generational technical community in our region of Maine.
             </p>
@@ -56,22 +61,24 @@
         });
 
         // Twitter
-        !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = "//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");    </script>
+        !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = "//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");
+    </script>
 }
 <article>
     <p>
         The group is targeted toward technical enthusiasts in the area of Maine roughly around the following towns:  Bangor & Monroe.
         We welcome any and all technical interests whether you're into software, hardware, networking, or mobile app development.  
     </p>
-    Next meeting:
+
+    <h3>Next meeting:</h3>
         <ul>
-            <li><mark title="Check the meet group to be sure!">@NextMeetup.ToLongDateString() 6pm @("@") @NextVenue.Name</mark> @NextVenue.LocationDesc (<a onclick="ShowMap();return false;" title="Google Map: @NextVenue.LocationAddr" href="@NextVenue.DirectURL">map</a>)</li>
+            <li><mark title="Check the meetup group to be sure!">@NextMeetup.ToLongDateString()</mark> 6pm until <abbr title="usually 9pm">booted</abbr> @("@") @NextVenue.Name @NextVenue.LocationDesc (<a onclick="ShowMap();return false;" title="Google Map: @NextVenue.LocationAddr" href="@NextVenue.DirectURL">map</a>)</li>
         </ul>
         <script>
             var mapBuilt = false;
             function ShowMap() {
                 $('#mapBox').show();
-                if (!mapBuilt) {
+                if (true || !mapBuilt) {
                     var mapFrame = '<iframe width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="@Html.Raw(NextVenue.EmbedURL)"></iframe>';
                     var largerLink = '<small><a href="@Html.Raw(NextVenue.LargerURL)" style="color:#0000FF;text-align:left">View Larger Map</a></small>';
                     $('#mapBox').html($('#mapBox').html() + mapFrame + '<br/>' + largerLink);
@@ -83,35 +90,61 @@
     <div id="mapBox" style="display:none;">
         <div class="closeButton" onclick="$('#mapBox').hide();return false;">X</div>
     </div>
-    <p>
-        If you have any questions about the group visit <a href="/forums" title="Maine Hackers Forum" >forums</a>, or check out the links below.
-    </p>
 
-    <h3>Web Projects</h3>
-    <ul><li>Awesomesauce: <a href="http://awesomesauce.me">Maine Hacker Club Projects</a></li></ul>
+    <h3>Hack Day: (<a href="~/Images/flyers/HackDay20130309.jpg" class="fancybox" rel="">INFO</a>)</h3>
+        <ul>
+            <li><mark title="Check the meetup group to be sure!">@NextHackDayDate.ToLongDateString()</mark> 9:30 am to 4 pm @("@") @NextHackDayVenue.Name @NextHackDayVenue.LocationDesc (<a onclick="ShowMapHackDay();return false;" title="Google Map: @NextHackDayVenue.LocationAddr" href="@NextHackDayVenue.DirectURL">map</a>)</li>
+        </ul>
+        <script>
+            var mapBuilt2 = false;
+            function ShowMapHackDay() {
+                $('#mapBox2').show();
+                if (!mapBuilt2) {
+                    var mapFrame = '<iframe width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="@Html.Raw(NextHackDayVenue.EmbedURL)"></iframe>';
+                    var largerLink = '<small><a href="@Html.Raw(NextHackDayVenue.LargerURL)" style="color:#0000FF;text-align:left">View Larger Map</a></small>';
+                    $('#mapBox2').html($('#mapBox2').html() + mapFrame + '<br/>' + largerLink);
+                    mapBuilt2 = true;
+                }
+            }
+        </script>
+
+    <div id="mapBox2" style="display:none;">
+        <div class="closeButton" onclick="$('#mapBox2').hide();return false;">X</div>
+    </div>
 
     <h3>For more information:</h3>
     <ol class="round">
+
         <li class="one">
+            <h5><a title="Maine Hacker Forums" href="http://www.hackmaine.org/forums">Forums…</a></h5>
+            Visit our forums to connect with other members, and discuss your projects.
+        </li>
+
+        <li class="two">
             <h5><a title="Maine Hacker Club" href="http://mainehackerclub.tumblr.com/">Tumblr…</a></h5>
             The Tumblr page has archives and photos from previous meetups
         </li>
 
-        <li class="two">
+        <li class="three">
             <h5><a title="Maine Hacker Club - Google Groups" href="https://groups.google.com/forum/?fromgroups#!forum/maine-hacker-club">Google Group…</a></h5>
-            Join the Maine Hacker Club Google group to network with other members.
+            Join the Maine Hacker Club discussion on Google Groups.
         </li>
 
-        <li class="three">
+        <li class="four">
             <h5><a title="Hacker Club (Bangor, ME) - Meetup" href="http://www.meetup.com/Hacker-Club/">Meetup…</a></h5>
             Join the meetup group to find out when the next meeting is, and let everyone know you're coming.
         </li>
-   
-            <li class="four">
+
+        <li class="five">
             <h5><a title="Maine Hacker Club on Twitter" href="https://twitter.com/mainehackerclub">Twitter…</a></h5>
-            Check out @("@")mainehackerclub on Twitter.<br />
-                <a href="https://twitter.com/mainehackerclub" class="twitter-follow-button" data-show-count="false">Follow @("@")mainehackerclub</a>
+            Check out @("@")mainehackerclub on Twitter. 
         </li>
+
+        <li class="six">
+            <h5><a title="Hacker Club (Bangor, ME) - Meetup" href="http://awesomesauce.me">Awesomesauce…</a></h5>
+            Description pending…
+        </li>
+
     </ol>
 </article>
 <aside>

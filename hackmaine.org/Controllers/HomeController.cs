@@ -39,6 +39,16 @@ namespace hackmaine.org.Controllers
             LargerURL = "https://maps.google.com/maps?hl=en&amp;q=Maine+Discovery+Museum+in+Downtown+Bangor&amp;ie=UTF8&amp;hq=Maine+Discovery+Museum&amp;hnear=Bangor,+Penobscot,+Maine&amp;t=m&amp;ll=44.803397,-68.76832&amp;spn=0.01218,0.025706&amp;z=15&amp;iwloc=A&amp;source=embed",
         };
 
+        public static readonly VenueInfo UnitedWayInfo = new VenueInfo()
+        {
+            Name = "United Way",
+            LocationDesc = "Near the Bangor Mall",
+            LocationAddr = "United Way, Bangor",
+            DirectURL = "https://maps.google.com/maps?q=24+Springer+Drive,+Suite+201+Bangor,+ME+&hl=en&ll=44.835437,-68.732529&spn=0.010499,0.026779&sll=37.6,-95.665&sspn=47.42872,109.6875&t=h&hnear=24+Springer+Dr+%23201,+Bangor,+Maine+04401&z=16&iwloc=A",
+            EmbedURL = "https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=24+Springer+Drive,+Suite+201+Bangor,+ME+&amp;sll=37.6,-95.665&amp;sspn=47.42872,109.6875&amp;t=h&amp;ie=UTF8&amp;hq=&amp;hnear=24+Springer+Dr+%23201,+Bangor,+Maine+04401&amp;ll=44.842968,-68.739824&amp;spn=0.024343,0.051413&amp;z=14&amp;iwloc=A&amp;output=embed",
+            LargerURL = "https://maps.google.com/maps?q=24+Springer+Drive,+Suite+201+Bangor,+ME+&hl=en&ll=44.835437,-68.732529&spn=0.010499,0.026779&sll=37.6,-95.665&sspn=47.42872,109.6875&t=h&hnear=24+Springer+Dr+%23201,+Bangor,+Maine+04401&z=16&iwloc=A",
+        };
+
         public ActionResult Index()
         {
             ViewBag.Message = "Getting nerdy at biweekly meetings in Bangor";
