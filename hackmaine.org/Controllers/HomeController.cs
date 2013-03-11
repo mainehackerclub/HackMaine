@@ -33,7 +33,8 @@ namespace hackmaine.org.Controllers
 
         List<EventInfo> ActiveEvents = new List<EventInfo>()
         {
-            new EventInfo("Next Meeting", MDMInfo, new DateTime(2013, 1, 8).AddHours(18), TimeSpan.FromHours(3.0), EventInfo.RepeatType.BiWeekly),
+            new EventInfo("Museum Meeting", MDMInfo, new DateTime(2013, 3, 13, 17, 0, 0), TimeSpan.FromHours(4.0), EventInfo.RepeatType.None),
+            new EventInfo("Bi-Weekly Meeting", MDMInfo, new DateTime(2013, 1, 8).AddHours(18), TimeSpan.FromHours(3.0), EventInfo.RepeatType.BiWeekly),
             new EventInfo("Hack Day", UnitedWayInfo, new DateTime(2013, 3, 9, 9, 30, 0), new DateTime(2013, 3, 9, 16, 0, 0), EventInfo.RepeatType.None)   
         };
 
