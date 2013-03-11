@@ -162,12 +162,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\EventInfo.cs" />
+    <Compile Include="Models\VenueInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -256,6 +259,7 @@
     <Content Include="Images\meetups\20121002_01t.jpg" />
     <Content Include="Images\meetups\20121002_02.jpg" />
     <Content Include="Images\meetups\20121002_02t.jpg" />
+    <Content Include="robots.txt" />
     <Content Include="Scripts\jcarousellite_1.0.1.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />

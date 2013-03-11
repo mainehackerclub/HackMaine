@@ -1,23 +1,11 @@
-﻿@using hackmaine.org.Controllers;
+﻿@using hackmaine.org.Models;
+@using hackmaine.org.Controllers;
 
 @{
     ViewBag.Title = "Welcome Hackers!";
-
-    DateTime Now = DateTime.Now;
-    DateTime NextMeetup = new DateTime(2013, 1, 8).AddHours(18);
-    while (NextMeetup < Now){
-        NextMeetup = NextMeetup.AddDays(14);
-    }
+    List<EventInfo> ActiveEvents = ViewBag.ActiveEvents;
 }
 
-@{
-    VenueInfo NextVenue = HomeController.MDMInfo;
-
-
-    DateTime NextHackDayDate = new DateTime(2013, 3, 9, 9, 30, 0);
-    VenueInfo NextHackDayVenue = HomeController.UnitedWayInfo;
-
-}
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
@@ -70,48 +58,61 @@
         We welcome any and all technical interests whether you're into software, hardware, networking, or mobile app development.  
     </p>
 
-    <h3>Next meeting:</h3>
+@if (ActiveEvents != null)
+{
+    bool printedPast = false;
+    int i = 0;
+    DateTime Now=DateTime.Now;
+    foreach (var upcoming in ActiveEvents.OrderBy(m=>m.NextEnd < Now).ThenBy(m => m.NextStart))
+    {
+        i++;
+        if (upcoming.NextEnd < DateTime.Now && !printedPast)
+        {
+            printedPast = true;
+            <hr />
+            <h4 style="margin-bottom:-12px;">Past Events:</h4>
+        }
+    <div itemscope itemtype="http://data-vocabulary.org/Event">
+    <h3><span itemprop="summary">@upcoming.EventName</span>:</h3>
         <ul>
-            <li><mark title="Check the meetup group to be sure!">@NextMeetup.ToLongDateString()</mark> 6pm until <abbr title="usually 9pm">booted</abbr> @("@") @NextVenue.Name @NextVenue.LocationDesc (<a onclick="ShowMap();return false;" title="Google Map: @NextVenue.LocationAddr" href="@NextVenue.DirectURL">map</a>)</li>
+            <li><time itemprop="startDate" datetime="@upcoming.Start.ToISOString()"><mark>@upcoming.NextStart.ToLongDateString()</mark> @upcoming.NextStart.ToShortTimeString().Replace(":00", "").Replace(" ", "").ToLower()</time> until <time itemprop="endDate" datetime="@upcoming.NextEnd.ToISOString()">@upcoming.NextEnd.ToShortTimeString().Replace(":00", "").Replace(" ", "").ToLower()</time> @("@") 
+                <span itemprop="location" itemscope itemtype="http://data-vocabulary.org/​Organization">@upcoming.Venue.Name</span>
+                @upcoming.Venue.LocationDesc (<a onclick="ShowMap@(i)();return false;" title="Google Map: @upcoming.Venue.LocationAddr" href="@upcoming.Venue.DirectURL">map</a>)
+                 ​<address itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
+                     <span itemprop="street-address">@upcoming.Venue.LocationAddrStreet</span>, 
+                     <span itemprop="locality">@upcoming.Venue.LocationAddrLocality</span>, 
+                     <span itemprop="region">@upcoming.Venue.LocationAddrState</span>
+                 </address>
+                @if (upcoming.Venue.HasCoords)
+                {
+                 <span itemprop="geo" itemscope itemtype="http://data-vocabulary.org/​Geo">
+                    <meta itemprop="latitude" content="@upcoming.Venue.Latitude" />
+                    <meta itemprop="longitude" content="@upcoming.Venue.Longitude" />
+                 </span>
+                }
+                </li>
         </ul>
         <script>
-            var mapBuilt = false;
-            function ShowMap() {
-                $('#mapBox').show();
-                if (true || !mapBuilt) {
-                    var mapFrame = '<iframe width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="@Html.Raw(NextVenue.EmbedURL)"></iframe>';
-                    var largerLink = '<small><a href="@Html.Raw(NextVenue.LargerURL)" style="color:#0000FF;text-align:left">View Larger Map</a></small>';
-                    $('#mapBox').html($('#mapBox').html() + mapFrame + '<br/>' + largerLink);
-                    mapBuilt = true;
+            var mapBuilt@(i) = false;
+            function ShowMap@(i)() {
+                $('#mapBox@(i)').show();
+                if (!mapBuilt@(i)) {
+                    var mapFrame = '<iframe width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="@Html.Raw(upcoming.Venue.EmbedURL)"></iframe>';
+                    var largerLink = '<small><a href="@Html.Raw(upcoming.Venue.LargerURL)" style="color:#0000FF;text-align:left">View Larger Map</a></small>';
+                    $('#mapBox@(i)').html($('#mapBox@(i)').html() + mapFrame + '<br/>' + largerLink);
+                    mapBuilt@(i) = true;
                 }
             }
         </script>
 
-    <div id="mapBox" style="display:none;">
-        <div class="closeButton" onclick="$('#mapBox').hide();return false;">X</div>
     </div>
 
-    <h3>Hack Day: (<a href="~/Images/flyers/HackDay20130309.jpg" class="fancybox" rel="">INFO</a>)</h3>
-        <ul>
-            <li><mark title="Check the meetup group to be sure!">@NextHackDayDate.ToLongDateString()</mark> 9:30 am to 4 pm @("@") @NextHackDayVenue.Name @NextHackDayVenue.LocationDesc (<a onclick="ShowMapHackDay();return false;" title="Google Map: @NextHackDayVenue.LocationAddr" href="@NextHackDayVenue.DirectURL">map</a>)</li>
-        </ul>
-        <script>
-            var mapBuilt2 = false;
-            function ShowMapHackDay() {
-                $('#mapBox2').show();
-                if (!mapBuilt2) {
-                    var mapFrame = '<iframe width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="@Html.Raw(NextHackDayVenue.EmbedURL)"></iframe>';
-                    var largerLink = '<small><a href="@Html.Raw(NextHackDayVenue.LargerURL)" style="color:#0000FF;text-align:left">View Larger Map</a></small>';
-                    $('#mapBox2').html($('#mapBox2').html() + mapFrame + '<br/>' + largerLink);
-                    mapBuilt2 = true;
-                }
-            }
-        </script>
-
-    <div id="mapBox2" style="display:none;">
-        <div class="closeButton" onclick="$('#mapBox2').hide();return false;">X</div>
-    </div>
-
+        <div id="mapBox@(i)" style="display:none;">
+        <div class="closeButton" onclick="$('#mapBox@(i)').hide();return false;">X</div>
+        </div>
+    }
+}
+    <hr />
     <h3>Web Projects</h3>
     <ul><li><a href="http://awesomesauce.me">Awesomesauce</a>: Maine Hacker Club Projects published from <a href="https://github.com/mainehackerclub/Node-Folio">gitHub/Node-Folio</a></li></ul>
 
