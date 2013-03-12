@@ -34,7 +34,7 @@ namespace hackmaine.org.Models
             }
         }
 
-        const string embedFormat = "http://maps.google.com/maps?q={0}&hl=en&{1}ll={2},{3}&t=m&z=14&iwloc=A&&output=embed";
+        const string embedFormat = "http://maps.google.com/maps?q={0}&hl=en&{1}ll={2},{3}&t=m&z=14&iwloc=A&output=embed";
         const string directFormat = "http://maps.google.com/maps?q={0}&hl=en&{1}ll={2},{3}&t=m&z=16&iwloc=A";
         const string largerFormat = directFormat;
 
@@ -76,7 +76,7 @@ namespace hackmaine.org.Models
 
         private string BuildMapURL(string format)
         {
-            return string.Format(format, HasCoords ? Name : string.Format("{0} {1}", Name, LocationAddr), HasCoords ? "" : "s", Latitude ?? BangorLatitude, Longitude ?? BangorLongitude);
+            return string.Format(format, HasCoords ? Name : string.Format("{0}+{1}", Name.Replace(' ', '+'), LocationAddr.Replace(' ', '+')), HasCoords ? "" : "s", Latitude ?? BangorLatitude, Longitude ?? BangorLongitude);
         }
 
         public bool HasCoords { get { return Latitude.HasValue && Longitude.HasValue; } }

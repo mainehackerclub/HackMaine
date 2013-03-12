@@ -75,22 +75,25 @@
     <div itemscope itemtype="http://data-vocabulary.org/Event">
     <h3><span itemprop="summary">@upcoming.EventName</span>:</h3>
         <ul>
-            <li><time itemprop="startDate" datetime="@upcoming.Start.ToISOString()"><mark>@upcoming.NextStart.ToLongDateString()</mark> @upcoming.NextStart.ToShortTimeString().Replace(":00", "").Replace(" ", "").ToLower()</time> until <time itemprop="endDate" datetime="@upcoming.NextEnd.ToISOString()">@upcoming.NextEnd.ToShortTimeString().Replace(":00", "").Replace(" ", "").ToLower()</time> @("@") 
-                <span itemprop="location" itemscope itemtype="http://data-vocabulary.org/​Organization">@upcoming.Venue.Name</span>
-                @upcoming.Venue.LocationDesc (<a onclick="ShowMap@(i)();return false;" title="Google Map: @upcoming.Venue.LocationAddr" href="@upcoming.Venue.DirectURL">map</a>)
-                 ​<address itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
-                     <span itemprop="street-address">@upcoming.Venue.LocationAddrStreet</span>, 
-                     <span itemprop="locality">@upcoming.Venue.LocationAddrLocality</span>, 
-                     <span itemprop="region">@upcoming.Venue.LocationAddrState</span>
-                 </address>
+            <li><time itemprop="startDate" datetime="@upcoming.Start.ToISOString()"><mark>@upcoming.NextStart.ToLongDateString()</mark> @upcoming.NextStart.ToShortTimeString().Replace(":00", "").Replace(" ", "").ToLower()</time> until <time itemprop="endDate" datetime="@upcoming.NextEnd.ToISOString()">@upcoming.NextEnd.ToShortTimeString().Replace(":00", "").Replace(" ", "").ToLower()</time>
+                <div itemprop="location" itemscope itemtype="http://data-vocabulary.org/Place">
+                    <span itemprop="name">@upcoming.Venue.Name</span>
+                        @upcoming.Venue.LocationDesc (<a onclick="ShowMap@(i)();return false;" title="Google Map: @upcoming.Venue.LocationAddr" href="@upcoming.Venue.DirectURL">map</a>)
+                     <meta itemprop="map" content="@upcoming.Venue.DirectURL" />
+                     ​<address itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
+                         <span itemprop="street-address">@upcoming.Venue.LocationAddrStreet</span>
+                         <span itemprop="locality">@upcoming.Venue.LocationAddrLocality</span>, 
+                         <span itemprop="region">@upcoming.Venue.LocationAddrState</span>
+                     </address>
                 @if (upcoming.Venue.HasCoords)
                 {
-                 <span itemprop="geo" itemscope itemtype="http://data-vocabulary.org/​Geo">
+                 <span itemprop="geo" itemscope itemtype="http://data-vocabulary.org/Geo">
                     <meta itemprop="latitude" content="@upcoming.Venue.Latitude" />
                     <meta itemprop="longitude" content="@upcoming.Venue.Longitude" />
                  </span>
                 }
-                </li>
+                </div>
+            </li>
         </ul>
         <script>
             var mapBuilt@(i) = false;

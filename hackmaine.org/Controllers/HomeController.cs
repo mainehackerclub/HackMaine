@@ -24,17 +24,17 @@ namespace hackmaine.org.Controllers
         {
             Latitude = 44.800106,
             Longitude = -68.772003,
-            EmbedURL = "https://maps.google.com/maps?hl=en&amp;q=Maine+Discovery+Museum+in+Downtown+Bangor&amp;ie=UTF8&amp;hq=Maine+Discovery+Museum&amp;hnear=Bangor,+Penobscot,+Maine&amp;t=m&amp;ll=44.803397,-68.76832&amp;spn=0.01218,0.025706&amp;z=15&amp;iwloc=A&amp;output=embed",
-            LargerURL = "https://maps.google.com/maps?hl=en&amp;q=Maine+Discovery+Museum+in+Downtown+Bangor&amp;ie=UTF8&amp;hq=Maine+Discovery+Museum&amp;hnear=Bangor,+Penobscot,+Maine&amp;t=m&amp;ll=44.803397,-68.76832&amp;spn=0.01218,0.025706&amp;z=15&amp;iwloc=A&amp;source=embed",
+            EmbedURL = "https://maps.google.com/maps?hl=en&q=Maine+Discovery+Museum+in+Downtown+Bangor&ie=UTF8&hq=Maine+Discovery+Museum&hnear=Bangor,+Penobscot,+Maine&t=m&ll=44.803397,-68.76832&spn=0.01218,0.025706&z=15&iwloc=A&output=embed",
+            LargerURL = "https://maps.google.com/maps?hl=en&q=Maine+Discovery+Museum+in+Downtown+Bangor&ie=UTF8&hq=Maine+Discovery+Museum&hnear=Bangor,+Penobscot,+Maine&t=m&ll=44.803397,-68.76832&spn=0.01218,0.025706&z=15&iwloc=A&source=embed",
             DirectURL = "http://www.bing.com/local/details.aspx?lid=YN418x10189830&q=Maine+Discovery+Museum+Bangor+ME&FORM=LARE",
         };
 
-        public static readonly VenueInfo UnitedWayInfo = new VenueInfo("United Way", "Near the Bangor Mall", "24 Springer Drive, Suite 201", "Bangor");
+        public static readonly VenueInfo UnitedWayInfo = new VenueInfo("United Way", "Near the Bangor Mall", "24 Springer Drive Suite 201", "Bangor");
 
         List<EventInfo> ActiveEvents = new List<EventInfo>()
         {
             new EventInfo("Museum Meeting", MDMInfo, new DateTime(2013, 3, 13, 17, 0, 0), TimeSpan.FromHours(4.0), EventInfo.RepeatType.None),
-            new EventInfo("Bi-Weekly Meeting", MDMInfo, new DateTime(2013, 1, 8).AddHours(18), TimeSpan.FromHours(3.0), EventInfo.RepeatType.BiWeekly),
+            new EventInfo("Biweekly Meeting", MDMInfo, new DateTime(2013, 1, 8).AddHours(18), TimeSpan.FromHours(3.0), EventInfo.RepeatType.BiWeekly),
             new EventInfo("Hack Day", UnitedWayInfo, new DateTime(2013, 3, 9, 9, 30, 0), new DateTime(2013, 3, 9, 16, 0, 0), EventInfo.RepeatType.None)   
         };
 
