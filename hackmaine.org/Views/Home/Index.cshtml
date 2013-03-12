@@ -63,23 +63,23 @@
     DateTime Now=DateTime.Now;
     foreach (var meeting in ActiveEvents.Where(m=>m.Next != null).OrderBy(m => m.Next.NextEnd < Now).ThenBy(m => m.Next.NextStart))
     {
-    <div itemscope itemtype="http://data-vocabulary.org/Event">
-    <h3><span itemprop="summary">@meeting.EventName</span>:@if(meeting.ImageURLs!=null && meeting.ImageURLs.Count()>0){<a class="fancybox" href="@meeting.ImageURLs.First()"><img class="icon_inline" title="Photo" alt="Photo of @meeting.EventName" src="~/Images/zoom_best_fit_14.png" /></a>}</h3>
-        @foreach(var Next in meeting.Upcoming)
+    <h3>@meeting.EventName:@if(meeting.ImageURLs!=null && meeting.ImageURLs.Count()>0){<a class="fancybox" href="@meeting.ImageURLs.First()"><img class="icon_inline" title="Photo" alt="Photo of @meeting.EventName" src="~/Images/zoom_best_fit_14.png" /></a>}</h3>
+        foreach(var Next in meeting.Upcoming)
         {
         VenueInfo Venue = Next.Venue;
         DateTime Start = Next.NextStart;
         DateTime End = Next.NextEnd;
         bool hasURL=!string.IsNullOrWhiteSpace(Venue.URL_Web);
         bool hasImage = !string.IsNullOrWhiteSpace(Venue.URL_Image);
+    <div itemscope itemtype="http://data-vocabulary.org/Event"><meta itemprop="summary" content="@meeting.EventName">
         <ul>
             <li><time itemprop="startDate" datetime="@Start.ToISOString()">
                 @if(ViewBag.showedFirst!=true){<mark>@Start.ToLongDateString()</mark> ViewBag.showedFirst = true;}
                 else{@Start.ToLongDateString()}
                 @Start.ToShortTimeString().Replace(":00", "").Replace(" ", "").ToLower()</time> until <time itemprop="endDate" datetime="@End.ToISOString()">@End.ToShortTimeString().Replace(":00", "").Replace(" ", "").ToLower()</time>
                 <div itemprop="location" itemscope itemtype="http://data-vocabulary.org/Place">
-                    @if(hasURL) {<a title="Visit @Venue.Name website" href="@Venue.URL_Web" itemprop="name">@Venue.Name</a>}
-                    else {<span itemprop="name">@Venue.Name</span>}@if(hasImage){<a class="fancybox" href="@Venue.URL_Image"><img class="icon_inline" title="Photo" alt="Photo of @Venue.Name" src="~/Images/zoom_best_fit_14.png" /></a> }
+                    @if(hasURL) {<a title="Visit @Venue.Name website" href="@Venue.URL_Web" itemprop="URL"><span itemprop="name">@Venue.Name</span></a>}
+                    else {<span itemprop="name">@Venue.Name</span>}@if(hasImage){<a itemprop="photo" class="fancybox" title="Photo" href="@Venue.URL_Image"><img class="icon_inline" alt="Photo of @Venue.Name" src="~/Images/zoom_best_fit_14.png" /></a> }
                     @Venue.LocationDesc (<a class="map" data-fancybox-type="iframe" title="Google Map: @Venue.LocationAddr" href="@Html.Raw(Venue.EmbedURL)">map</a>)
                     <meta itemprop="map" content="@Venue.DirectURL" />
                     ​<address itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
@@ -97,8 +97,8 @@
                 </div>
             </li>
         </ul>
-        }
     </div>
+        }
     }
 }
     <hr />
