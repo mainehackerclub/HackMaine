@@ -60,59 +60,45 @@
 
 @if (ActiveEvents != null)
 {
-    bool printedPast = false;
-    int i = 0;
     DateTime Now=DateTime.Now;
-    foreach (var upcoming in ActiveEvents.OrderBy(m=>m.NextEnd < Now).ThenBy(m => m.NextStart))
+    foreach (var meeting in ActiveEvents.Where(m=>m.Next != null).OrderBy(m => m.Next.NextEnd < Now).ThenBy(m => m.Next.NextStart))
     {
-        i++;
-        if (upcoming.NextEnd < DateTime.Now && !printedPast)
-        {
-            printedPast = true;
-            <hr />
-            <h4 style="margin-bottom:-12px;">Past Events:</h4>
-        }
     <div itemscope itemtype="http://data-vocabulary.org/Event">
-    <h3><span itemprop="summary">@upcoming.EventName</span>:</h3>
+    <h3><span itemprop="summary">@meeting.EventName</span>:@if(meeting.ImageURLs!=null && meeting.ImageURLs.Count()>0){<a class="fancybox" href="@meeting.ImageURLs.First()"><img class="icon_inline" title="Photo" alt="Photo of @meeting.EventName" src="~/Images/zoom_best_fit_14.png" /></a>}</h3>
+        @foreach(var Next in meeting.Upcoming)
+        {
+        VenueInfo Venue = Next.Venue;
+        DateTime Start = Next.NextStart;
+        DateTime End = Next.NextEnd;
+        bool hasURL=!string.IsNullOrWhiteSpace(Venue.URL_Web);
+        bool hasImage = !string.IsNullOrWhiteSpace(Venue.URL_Image);
         <ul>
-            <li><time itemprop="startDate" datetime="@upcoming.Start.ToISOString()"><mark>@upcoming.NextStart.ToLongDateString()</mark> @upcoming.NextStart.ToShortTimeString().Replace(":00", "").Replace(" ", "").ToLower()</time> until <time itemprop="endDate" datetime="@upcoming.NextEnd.ToISOString()">@upcoming.NextEnd.ToShortTimeString().Replace(":00", "").Replace(" ", "").ToLower()</time>
+            <li><time itemprop="startDate" datetime="@Start.ToISOString()">
+                @if(ViewBag.showedFirst!=true){<mark>@Start.ToLongDateString()</mark> ViewBag.showedFirst = true;}
+                else{@Start.ToLongDateString()}
+                @Start.ToShortTimeString().Replace(":00", "").Replace(" ", "").ToLower()</time> until <time itemprop="endDate" datetime="@End.ToISOString()">@End.ToShortTimeString().Replace(":00", "").Replace(" ", "").ToLower()</time>
                 <div itemprop="location" itemscope itemtype="http://data-vocabulary.org/Place">
-                    <span itemprop="name">@upcoming.Venue.Name</span>
-                        @upcoming.Venue.LocationDesc (<a onclick="ShowMap@(i)();return false;" title="Google Map: @upcoming.Venue.LocationAddr" href="@upcoming.Venue.DirectURL">map</a>)
-                     <meta itemprop="map" content="@upcoming.Venue.DirectURL" />
-                     ​<address itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
-                         <span itemprop="street-address">@upcoming.Venue.LocationAddrStreet</span>
-                         <span itemprop="locality">@upcoming.Venue.LocationAddrLocality</span>, 
-                         <span itemprop="region">@upcoming.Venue.LocationAddrState</span>
-                     </address>
-                @if (upcoming.Venue.HasCoords)
-                {
-                 <span itemprop="geo" itemscope itemtype="http://data-vocabulary.org/Geo">
-                    <meta itemprop="latitude" content="@upcoming.Venue.Latitude" />
-                    <meta itemprop="longitude" content="@upcoming.Venue.Longitude" />
-                 </span>
-                }
+                    @if(hasURL) {<a title="Visit @Venue.Name website" href="@Venue.URL_Web" itemprop="name">@Venue.Name</a>}
+                    else {<span itemprop="name">@Venue.Name</span>}@if(hasImage){<a class="fancybox" href="@Venue.URL_Image"><img class="icon_inline" title="Photo" alt="Photo of @Venue.Name" src="~/Images/zoom_best_fit_14.png" /></a> }
+                    @Venue.LocationDesc (<a class="map" data-fancybox-type="iframe" title="Google Map: @Venue.LocationAddr" href="@Html.Raw(Venue.EmbedURL)">map</a>)
+                    <meta itemprop="map" content="@Venue.DirectURL" />
+                    ​<address itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
+                        <span itemprop="street-address">@Venue.LocationAddrStreet</span>
+                        <span itemprop="locality">@Venue.LocationAddrLocality</span>, 
+                        <span itemprop="region">@Venue.LocationAddrState</span>
+                    </address>
+                    @if (Venue.HasCoords)
+                    {
+                    <span itemprop="geo" itemscope itemtype="http://data-vocabulary.org/Geo">
+                        <meta itemprop="latitude" content="@Venue.Latitude" />
+                        <meta itemprop="longitude" content="@Venue.Longitude" />
+                    </span>
+                    }
                 </div>
             </li>
         </ul>
-        <script>
-            var mapBuilt@(i) = false;
-            function ShowMap@(i)() {
-                $('#mapBox@(i)').show();
-                if (!mapBuilt@(i)) {
-                    var mapFrame = '<iframe width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="@Html.Raw(upcoming.Venue.EmbedURL)"></iframe>';
-                    var largerLink = '<small><a href="@Html.Raw(upcoming.Venue.LargerURL)" style="color:#0000FF;text-align:left">View Larger Map</a></small>';
-                    $('#mapBox@(i)').html($('#mapBox@(i)').html() + mapFrame + '<br/>' + largerLink);
-                    mapBuilt@(i) = true;
-                }
-            }
-        </script>
-
+        }
     </div>
-
-        <div id="mapBox@(i)" style="display:none;">
-        <div class="closeButton" onclick="$('#mapBox@(i)').hide();return false;">X</div>
-        </div>
     }
 }
     <hr />

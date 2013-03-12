@@ -13,29 +13,35 @@ namespace hackmaine.org.Controllers
         public static readonly VenueInfo BAMInfo =
             new VenueInfo("Books-A-Million", "near the Bangor Mall in Bangor", "116 Bangor Mall Blvd.", "Bangor")
         {
+            URL_Image = "http://cbks0.google.com/cbk?output=thumbnail&w=360&h=272&ll=44.833240,-68.746298&thumb=1",
             Latitude = 44.834174,
             Longitude = -68.746305,
-            EmbedURL = "http://maps.google.com/maps?q=Books-A-Million&amp;hl=en&amp;sll=44.833246,-68.746305&amp;sspn=0.011139,0.01678&amp;t=h&amp;ie=UTF8&amp;hq=Books-A-Million&amp;hnear=&amp;cid=401696528683542693&amp;source=embed&amp;ll=44.840595,-68.745832&amp;spn=0.024344,0.051413&amp;z=14&amp;iwloc=A&amp;output=embed",
-            LargerURL = "http://maps.google.com/maps?q=Books-A-Million&amp;hl=en&amp;sll=44.833246,-68.746305&amp;sspn=0.011139,0.01678&amp;t=h&amp;ie=UTF8&amp;hq=Books-A-Million&amp;hnear=&amp;cid=401696528683542693&amp;source=embed&amp;ll=44.840595,-68.745832&amp;spn=0.024344,0.051413&amp;z=14&amp;iwloc=A",
-            DirectURL = "http://maps.google.com/maps?q=Books-A-Million&hl=en&sll=44.833246,-68.746305&sspn=0.011139,0.01678&t=m&z=16&iwloc=A",
         };
 
         public static readonly VenueInfo MDMInfo = new VenueInfo("Maine Discovery Museum", "in Downtown Bangor", "74 Main St.", "Bangor")
         {
+            URL_Web = "http://www.mainediscoverymuseum.org/",
+            URL_Image="http://www.bing.com/th?id=A%2b4a3T%2fdT%2fqNSoQ480x360",
             Latitude = 44.800106,
             Longitude = -68.772003,
-            EmbedURL = "https://maps.google.com/maps?hl=en&q=Maine+Discovery+Museum+in+Downtown+Bangor&ie=UTF8&hq=Maine+Discovery+Museum&hnear=Bangor,+Penobscot,+Maine&t=m&ll=44.803397,-68.76832&spn=0.01218,0.025706&z=15&iwloc=A&output=embed",
-            LargerURL = "https://maps.google.com/maps?hl=en&q=Maine+Discovery+Museum+in+Downtown+Bangor&ie=UTF8&hq=Maine+Discovery+Museum&hnear=Bangor,+Penobscot,+Maine&t=m&ll=44.803397,-68.76832&spn=0.01218,0.025706&z=15&iwloc=A&source=embed",
-            DirectURL = "http://www.bing.com/local/details.aspx?lid=YN418x10189830&q=Maine+Discovery+Museum+Bangor+ME&FORM=LARE",
         };
 
         public static readonly VenueInfo UnitedWayInfo = new VenueInfo("United Way", "Near the Bangor Mall", "24 Springer Drive Suite 201", "Bangor");
 
         List<EventInfo> ActiveEvents = new List<EventInfo>()
         {
-            new EventInfo("Museum Meeting", MDMInfo, new DateTime(2013, 3, 13, 17, 0, 0), TimeSpan.FromHours(4.0), EventInfo.RepeatType.None),
-            new EventInfo("Biweekly Meeting", MDMInfo, new DateTime(2013, 1, 8).AddHours(18), TimeSpan.FromHours(3.0), EventInfo.RepeatType.BiWeekly),
-            new EventInfo("Hack Day", UnitedWayInfo, new DateTime(2013, 3, 9, 9, 30, 0), new DateTime(2013, 3, 9, 16, 0, 0), EventInfo.RepeatType.None)   
+            new EventInfo("Regular Meeting", 
+                new EventSchedule[]{ 
+                    new EventSchedule( MDMInfo, new DateTime(2013, 3, 13, 17, 0, 0), TimeSpan.FromHours(4.0), EventSchedule.RepeatType.None),
+                    new EventSchedule( MDMInfo, new DateTime(2013, 1, 8, 18, 0 ,0), TimeSpan.FromHours(3.0), EventSchedule.RepeatType.BiWeekly),
+                    new EventSchedule( BAMInfo, new DateTime(2013, 3, 27, 18, 0 ,0), TimeSpan.FromHours(3.0), EventSchedule.RepeatType.BiWeekly)
+                }),
+            new EventInfo("Hack Day", 
+                new EventSchedule[]{ new EventSchedule( UnitedWayInfo, new DateTime(2013, 3, 9, 9, 30, 0), new DateTime(2013, 3, 9, 16, 0, 0), EventSchedule.RepeatType.None)}
+                )
+                {
+                    ImageURLs=new string[]{ "/Images/flyers/HackDay20130309.jpg" }
+                }
         };
 
         public ActionResult Index()

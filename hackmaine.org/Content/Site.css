@@ -139,6 +139,12 @@ footer {
     padding-left:2px;
 }
 
+a img.icon_inline{
+    padding:0;
+    margin:0;
+    border:none;
+    vertical-align:middle;
+}
 
 /* site title
 ----------------------------------------------------------*/
