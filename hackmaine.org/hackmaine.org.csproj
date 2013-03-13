@@ -175,6 +175,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="apple-touch-icon-ipad-144.png" />
+    <Content Include="apple-touch-icon-ipad-72.png" />
+    <Content Include="apple-touch-icon-iphone-114.png" />
+    <Content Include="apple-touch-icon-iphone-57.png" />
     <Content Include="Audio\beep-2.wav" />
     <Content Include="Audio\beep-3.wav" />
     <Content Include="Audio\beep-4.wav" />
