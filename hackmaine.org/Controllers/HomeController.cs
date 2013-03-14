@@ -13,7 +13,6 @@ namespace hackmaine.org.Controllers
         public static readonly VenueInfo BAMInfo =
             new VenueInfo("Books-A-Million", "near the Bangor Mall in Bangor", "116 Bangor Mall Blvd.", "Bangor")
         {
-            URL_Image = "http://cbks0.google.com/cbk?output=thumbnail&w=360&h=272&ll=44.833240,-68.746298&thumb=1",
             Latitude = 44.834174,
             Longitude = -68.746305,
         };
@@ -30,13 +29,13 @@ namespace hackmaine.org.Controllers
 
         List<EventInfo> ActiveEvents = new List<EventInfo>()
         {
-            new EventInfo("Regular Meeting", 
+            new EventInfo(Guid.Parse("6a73c03d-0f5a-4978-bee6-6919292e5654"), "Regular Meeting", "More info at http://www.hackmaine.org/",
                 new EventSchedule[]{ 
                     new EventSchedule( MDMInfo, new DateTime(2013, 3, 13, 17, 0, 0), TimeSpan.FromHours(4.0), EventSchedule.RepeatType.None),
                     new EventSchedule( MDMInfo, new DateTime(2013, 1, 8, 18, 0 ,0), TimeSpan.FromHours(3.0), EventSchedule.RepeatType.BiWeekly),
                     new EventSchedule( BAMInfo, new DateTime(2013, 3, 27, 18, 0 ,0), TimeSpan.FromHours(3.0), EventSchedule.RepeatType.BiWeekly)
                 }),
-            new EventInfo("Hack Day", 
+            new EventInfo(Guid.Parse("ed70d17e-dffb-4f4b-8c4b-16e6573a1c93"), "Hack Day", "Our first day of hacking.",
                 new EventSchedule[]{ new EventSchedule( UnitedWayInfo, new DateTime(2013, 3, 9, 9, 30, 0), new DateTime(2013, 3, 9, 16, 0, 0), EventSchedule.RepeatType.None)}
                 )
                 {
@@ -50,6 +49,33 @@ namespace hackmaine.org.Controllers
             ViewBag.ActiveEvents = ActiveEvents;
 
             return View();
+        }
+
+        public ActionResult vCal(string id)
+        {
+            string[] split = id.Split('_');
+            Guid eventId;
+            if(split.Length==2 && Guid.TryParse(split[0],out eventId))
+            {
+                var Event = ActiveEvents.Where(m=>m.ID==eventId).FirstOrDefault();
+                if (eventId != null)
+                {
+                    var sch = Event.UpcomingFromUID(id);
+                    if (sch != null)
+                    {
+                        string ics = Event.CreateICS(sch);
+                        if (!string.IsNullOrWhiteSpace(ics))
+                        {
+                            Response.ContentType = "text/calendar";
+                            Response.Write(ics);
+                            return null;
+                        }
+                    }
+                }
+            }
+
+            Response.StatusCode = 404;
+            return null;
         }
 
         //public ActionResult About()

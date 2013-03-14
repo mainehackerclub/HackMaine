@@ -74,12 +74,18 @@
     <div itemscope itemtype="http://data-vocabulary.org/Event"><meta itemprop="summary" content="@meeting.EventName">
         <ul>
             <li><time itemprop="startDate" datetime="@Start.ToISOString()">
-                @if(ViewBag.showedFirst!=true){<mark>@Start.ToLongDateString()</mark> ViewBag.showedFirst = true;}
+                @if(ViewBag.showedFirst!=true){<mark title="Next Meeting">@Start.ToLongDateString()</mark> ViewBag.showedFirst = true;}
                 else{@Start.ToLongDateString()}
                 @Start.ToShortTimeString().Replace(":00", "").Replace(" ", "").ToLower()</time> until <time itemprop="endDate" datetime="@End.ToISOString()">@End.ToShortTimeString().Replace(":00", "").Replace(" ", "").ToLower()</time>
+                @if(Start > DateTime.Now)
+                {
+                @Html.ActionLink("Add to Outlook", "vCal", new { id = meeting.NextUID(Next) }, new { @class = "icon16 vCal", title="Add to Outlook or iCalendar" })
+                <a class="icon16 googleCal" href="@Html.Raw(meeting.CreateGoogleCalURL(Next))" title="Add to Google Calendar">Add to Google</a>
+                <a class="icon16 yahooCal" href="@Html.Raw(meeting.CreateYahooCalURL(Next))" title="Add to Yahoo Calendar">Add to Yahoo</a>
+                }
                 <div itemprop="location" itemscope itemtype="http://data-vocabulary.org/Place">
                     @if(hasURL) {<a title="Visit @Venue.Name website" href="@Venue.URL_Web" itemprop="URL"><span itemprop="name">@Venue.Name</span></a>}
-                    else {<span itemprop="name">@Venue.Name</span>}@if(hasImage){<a itemprop="photo" class="fancybox" title="Photo" href="@Venue.URL_Image"><img class="icon_inline" alt="Photo of @Venue.Name" src="~/Images/zoom_best_fit_14.png" /></a> }
+                    else {<span itemprop="name">@Venue.Name</span>}@if(hasImage){<a itemprop="photo" class="fancybox" title="Photo of @Venue.Name" href="@Venue.URL_Image"><img class="icon_inline" alt="Photo of @Venue.Name" src="~/Images/zoom_best_fit_14.png" /></a> }
                     @Venue.LocationDesc (<a class="map" data-fancybox-type="iframe" title="Google Map: @Venue.LocationAddr" href="@Html.Raw(Venue.EmbedURL)">map</a>)
                     <meta itemprop="map" content="@Venue.DirectURL" />
                     ​<address itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">

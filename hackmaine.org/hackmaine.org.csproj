@@ -169,6 +169,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\DateTimeExtensions.cs" />
     <Compile Include="Models\EventInfo.cs" />
     <Compile Include="Models\EventSchedule.cs" />
     <Compile Include="Models\VenueInfo.cs" />
@@ -250,7 +251,9 @@
     <None Include="Properties\PublishProfiles\Web3.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="googlec7ce5d66feaa707c.html" />
+    <Content Include="Images\date2.png" />
     <Content Include="Images\flyers\HackDay20130309.jpg" />
+    <Content Include="Images\google_calendar_16.png" />
     <Content Include="Images\HackerClub.jpg" />
     <Content Include="Images\HackerClub_24.png" />
     <Content Include="Images\HackerClub_32.png" />
@@ -265,6 +268,7 @@
     <Content Include="Images\meetups\20121002_01t.jpg" />
     <Content Include="Images\meetups\20121002_02.jpg" />
     <Content Include="Images\meetups\20121002_02t.jpg" />
+    <Content Include="Images\yahoo_16.png" />
     <Content Include="Images\zoom_best_fit_14.png" />
     <Content Include="robots.txt" />
     <Content Include="Scripts\jcarousellite_1.0.1.js" />

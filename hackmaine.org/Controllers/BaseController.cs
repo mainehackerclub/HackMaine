@@ -9,13 +9,6 @@ using System.Xml;
 
 namespace hackmaine.org.Controllers
 {
-    public static class DateTimeExtensions
-    {
-        public static string ToISOString(this DateTime date)
-        {
-            return XmlConvert.ToString(date, XmlDateTimeSerializationMode.Local);
-        }
-    }
 
     public class BaseController : Controller
     {
