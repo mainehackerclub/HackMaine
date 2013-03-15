@@ -15,27 +15,32 @@ namespace hackmaine.org.Controllers
         {
             Latitude = 44.834174,
             Longitude = -68.746305,
-            EmbedURL = "http://maps.google.com/maps?q=Books-A-Million&amp;hl=en&amp;sll=44.833246,-68.746305&amp;sspn=0.011139,0.01678&amp;t=h&amp;ie=UTF8&amp;hq=Books-A-Million&amp;hnear=&amp;cid=401696528683542693&amp;source=embed&amp;ll=44.840595,-68.745832&amp;spn=0.024344,0.051413&amp;z=14&amp;iwloc=A&amp;output=embed",
-            LargerURL = "http://maps.google.com/maps?q=Books-A-Million&amp;hl=en&amp;sll=44.833246,-68.746305&amp;sspn=0.011139,0.01678&amp;t=h&amp;ie=UTF8&amp;hq=Books-A-Million&amp;hnear=&amp;cid=401696528683542693&amp;source=embed&amp;ll=44.840595,-68.745832&amp;spn=0.024344,0.051413&amp;z=14&amp;iwloc=A",
-            DirectURL = "http://maps.google.com/maps?q=Books-A-Million&hl=en&sll=44.833246,-68.746305&sspn=0.011139,0.01678&t=m&z=16&iwloc=A",
         };
 
         public static readonly VenueInfo MDMInfo = new VenueInfo("Maine Discovery Museum", "in Downtown Bangor", "74 Main St.", "Bangor")
         {
+            URL_Web = "http://www.mainediscoverymuseum.org/",
+            URL_Image="http://www.bing.com/th?id=A%2b4a3T%2fdT%2fqNSoQ480x360",
             Latitude = 44.800106,
             Longitude = -68.772003,
-            EmbedURL = "https://maps.google.com/maps?hl=en&amp;q=Maine+Discovery+Museum+in+Downtown+Bangor&amp;ie=UTF8&amp;hq=Maine+Discovery+Museum&amp;hnear=Bangor,+Penobscot,+Maine&amp;t=m&amp;ll=44.803397,-68.76832&amp;spn=0.01218,0.025706&amp;z=15&amp;iwloc=A&amp;output=embed",
-            LargerURL = "https://maps.google.com/maps?hl=en&amp;q=Maine+Discovery+Museum+in+Downtown+Bangor&amp;ie=UTF8&amp;hq=Maine+Discovery+Museum&amp;hnear=Bangor,+Penobscot,+Maine&amp;t=m&amp;ll=44.803397,-68.76832&amp;spn=0.01218,0.025706&amp;z=15&amp;iwloc=A&amp;source=embed",
-            DirectURL = "http://www.bing.com/local/details.aspx?lid=YN418x10189830&q=Maine+Discovery+Museum+Bangor+ME&FORM=LARE",
         };
 
-        public static readonly VenueInfo UnitedWayInfo = new VenueInfo("United Way", "Near the Bangor Mall", "24 Springer Drive, Suite 201", "Bangor");
+        public static readonly VenueInfo UnitedWayInfo = new VenueInfo("United Way", "Near the Bangor Mall", "24 Springer Drive Suite 201", "Bangor");
 
         List<EventInfo> ActiveEvents = new List<EventInfo>()
         {
-            new EventInfo("Museum Meeting", MDMInfo, new DateTime(2013, 3, 13, 17, 0, 0), TimeSpan.FromHours(4.0), EventInfo.RepeatType.None),
-            new EventInfo("Bi-Weekly Meeting", MDMInfo, new DateTime(2013, 1, 8).AddHours(18), TimeSpan.FromHours(3.0), EventInfo.RepeatType.BiWeekly),
-            new EventInfo("Hack Day", UnitedWayInfo, new DateTime(2013, 3, 9, 9, 30, 0), new DateTime(2013, 3, 9, 16, 0, 0), EventInfo.RepeatType.None)   
+            new EventInfo(Guid.Parse("6a73c03d-0f5a-4978-bee6-6919292e5654"), "Regular Meeting", "More info at http://www.hackmaine.org/",
+                new EventSchedule[]{ 
+                    new EventSchedule( MDMInfo, new DateTime(2013, 3, 13, 17, 0, 0), TimeSpan.FromHours(4.0), EventSchedule.RepeatType.None),
+                    new EventSchedule( MDMInfo, new DateTime(2013, 1, 8, 18, 0 ,0), TimeSpan.FromHours(3.0), EventSchedule.RepeatType.BiWeekly),
+                    new EventSchedule( BAMInfo, new DateTime(2013, 3, 27, 18, 0 ,0), TimeSpan.FromHours(3.0), EventSchedule.RepeatType.BiWeekly)
+                }),
+            new EventInfo(Guid.Parse("ed70d17e-dffb-4f4b-8c4b-16e6573a1c93"), "Hack Day", "Our first day of hacking.",
+                new EventSchedule[]{ new EventSchedule( UnitedWayInfo, new DateTime(2013, 3, 9, 9, 30, 0), new DateTime(2013, 3, 9, 16, 0, 0), EventSchedule.RepeatType.None)}
+                )
+                {
+                    ImageURLs=new string[]{ "/Images/flyers/HackDay20130309.jpg" }
+                }
         };
 
         public ActionResult Index()
@@ -44,6 +49,33 @@ namespace hackmaine.org.Controllers
             ViewBag.ActiveEvents = ActiveEvents;
 
             return View();
+        }
+
+        public ActionResult vCal(string id)
+        {
+            string[] split = id.Split('_');
+            Guid eventId;
+            if(split.Length==2 && Guid.TryParse(split[0],out eventId))
+            {
+                var Event = ActiveEvents.Where(m=>m.ID==eventId).FirstOrDefault();
+                if (eventId != null)
+                {
+                    var sch = Event.UpcomingFromUID(id);
+                    if (sch != null)
+                    {
+                        string ics = Event.CreateICS(sch);
+                        if (!string.IsNullOrWhiteSpace(ics))
+                        {
+                            Response.ContentType = "text/calendar";
+                            Response.Write(ics);
+                            return null;
+                        }
+                    }
+                }
+            }
+
+            Response.StatusCode = 404;
+            return null;
         }
 
         //public ActionResult About()

@@ -139,6 +139,35 @@ footer {
     padding-left:2px;
 }
 
+a img.icon_inline{
+    padding:0;
+    margin:0;
+    border:none;
+    vertical-align:middle;
+}
+
+a.icon16{
+    width:16px;
+    height:16px;
+    max-width:16px;
+    max-height:16px;
+    text-indent:-6000px;
+    display:inline-block;
+    padding:0;
+}
+
+a.vCal{
+    background-image: url(../Images/date2.png);
+}
+
+a.yahooCal{
+    background-image: url(../Images/yahoo_16.png);
+}
+
+a.googleCal{
+    background-image: url(../Images/google_calendar_16.png);
+}
+
 
 /* site title
 ----------------------------------------------------------*/
