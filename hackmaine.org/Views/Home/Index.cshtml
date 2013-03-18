@@ -48,9 +48,22 @@
             }
         });
 
+        $('#nextMeeting').hide();
+        $(function () {
+            var that = $;
+            $.ajax({
+                url: '/Home/MeetupFrame',
+                dataType: 'html',
+                success: function (data, textStatus) {
+                    that('#nextMeetup').html(data);
+                    that('#nextMeeting').show();
+                }
+            });
+        });
+
         // Twitter
         !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = "//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");
-    </script>
+   </script>
 }
 <article>
     <p>
@@ -133,15 +146,17 @@
             <h5><a title="Maine Hacker Club on Twitter" href="https://twitter.com/mainehackerclub">Twitter…</a></h5>
             Check out @("@")mainehackerclub on Twitter. 
         </li>
-
+@*
         <li class="five">
             <h5><a title="Maine Hacker Club" href="http://mainehackerclub.tumblr.com/">Tumblr…</a></h5>
             The Tumblr page has archives and photos from previous meetups
         </li>
-
-
+*@
     </ol>
 </article>
+<aside class="first">
+    @Html.Partial("MeetupProfile")
+</aside>
 @{
     IEnumerable<ImageInfo> Images=ViewBag.Images;
     if (Images != null && Images.Count() > 0)
@@ -150,13 +165,18 @@
     <h3>Previous Meetups</h3>
     <div class="gallery vertical">
         <ul>
-        @foreach(var image in Images)
+        @foreach (var image in Images)
         {
             <li><a class="fancybox" rel="" href="@Html.Raw(image.FullURL)">
-                <img title="@if(image.Date.HasValue){ @image.Date.Value.ToDateString()<text>:  </text>}@Html.Encode(image.Title)" src="@Html.Raw(image.ThumbURL)" /></a></li>
+                <img title="@if (image.Date.HasValue)
+                            { @image.Date.Value.ToDateString()<text>:  </text>}@Html.Encode(image.Title)" src="@Html.Raw(image.ThumbURL)" /></a></li>
         }
         </ul>
     </div>
 </aside>
     }
 }
+<article id="nextMeeting">
+    <h3>Upcoming Meetup</h3>
+    <div id="nextMeetup"></div>
+</article>

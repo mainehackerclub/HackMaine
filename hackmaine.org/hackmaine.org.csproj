@@ -269,6 +269,8 @@
     <Content Include="Images\meetups\20121002_01t.jpg" />
     <Content Include="Images\meetups\20121002_02.jpg" />
     <Content Include="Images\meetups\20121002_02t.jpg" />
+    <Content Include="Images\meetups\20130108_01.jpg" />
+    <Content Include="Images\meetups\20130108_01t.jpg" />
     <Content Include="Images\meetups\20130205_01.jpg" />
     <Content Include="Images\meetups\20130205_01t.jpg" />
     <Content Include="Images\meetups\20130205_02.jpg" />
@@ -350,6 +352,8 @@
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\Home\MeetupFrame.cshtml" />
+    <Content Include="Views\Home\MeetupProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
