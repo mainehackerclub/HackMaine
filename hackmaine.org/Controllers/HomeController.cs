@@ -1,7 +1,11 @@
 ﻿using hackmaine.org.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -43,11 +47,26 @@ namespace hackmaine.org.Controllers
                 }
         };
 
+        public static ImageInfo[] Images = 
+        { 
+            new ImageInfo() { Date=new DateTime(2012,7,24), Title="Hacking Arduino via Sketch IDE.", ThumbURL="/Images/meetups/20120724_01t.jpg", FullURL="/Images/meetups/20120724_01.jpg"},
+            new ImageInfo() { Date=new DateTime(2012,7,24), Title="Grokking memory corruption security exploits.", ThumbURL="/Images/meetups/20120724_02t.jpg", FullURL="/Images/meetups/20120724_02.jpg"},
+            new ImageInfo() { Date=new DateTime(2012,9,18), Title="Denis takes us through a “Electrical Circuits 101”", ThumbURL="/Images/meetups/20120918_01t.jpg", FullURL="/Images/meetups/20120918_01.jpg"},
+            new ImageInfo() { Date=new DateTime(2012,10,2), Title="Check out the nerd joy on @zacheryschiller", ThumbURL="/Images/meetups/20121002_01t.jpg", FullURL="/Images/meetups/20121002_01.jpg"},
+            new ImageInfo() { Date=new DateTime(2012,10,2), Title="Join us for some hardware hacking.", ThumbURL="/Images/meetups/20121002_02t.jpg", FullURL="/Images/meetups/20121002_02.jpg"},
+            new ImageInfo() { Date=new DateTime(2013,1,8), Title="Big group at Books-A-Million", ThumbURL="/Images/meetups/20130108_01t.jpg", FullURL="/Images/meetups/20130108_01.jpg"},
+            new ImageInfo() { Date=new DateTime(2013,2,5), Title="Collaborating at the Maine Discovery Museum", ThumbURL="/Images/meetups/20130205_01t.jpg", FullURL="/Images/meetups/20130205_01.jpg"},
+            new ImageInfo() { Date=new DateTime(2013,2,5), Title="Checking out some exhibits", ThumbURL="/Images/meetups/20130205_02t.jpg", FullURL="/Images/meetups/20130205_02.jpg"},
+            new ImageInfo() { Date=new DateTime(2013,3,5), Title="Drawing stuff", ThumbURL="/Images/meetups/20130305_01t.jpg", FullURL="/Images/meetups/20130305_01.jpg"},
+            new ImageInfo() { Date=new DateTime(2013,3,5), Title="Aaron does some plumbing", ThumbURL="/Images/meetups/20130305_02t.jpg", FullURL="/Images/meetups/20130305_02.jpg"},
+            new ImageInfo() { Date=new DateTime(2013,3,9), Title="First Hack Day", ThumbURL="/Images/meetups/20130309_01t.jpg", FullURL="/Images/meetups/20130309_01.jpg"},
+        };
+
         public ActionResult Index()
         {
             ViewBag.Message = "Getting nerdy at biweekly meetings in Bangor";
             ViewBag.ActiveEvents = ActiveEvents;
-
+            ViewBag.Images = Images.OrderByDescending(m=>m.Date);
             return View();
         }
 
@@ -91,5 +110,38 @@ namespace hackmaine.org.Controllers
 
         //    return View();
         //}
+
+        string meetupFrameReq = "https://api.meetup.com/oembed?key=3b7d431d2c7427116f41916f7d1226&sign=true&url=http://www.meetup.com/Hacker-Club/";
+
+        [OutputCache(Duration=360)]
+        public async Task<PartialViewResult> MeetupFrame()
+        {
+            var req = WebRequest.CreateHttp(meetupFrameReq);
+            try
+            {
+                using (var r = await req.GetResponseAsync())
+                {
+                    var jsonSerializer = new JsonSerializer();
+                    dynamic response = jsonSerializer.Deserialize(new JsonTextReader(new StreamReader(r.GetResponseStream())));
+
+                    string html = response.html.Value;
+                    html = html.Replace("<div id=\"meetup_oembed\" style=\"height:397px\">", "<div id=\"meetup_oembed\">");
+
+                    return PartialView(new MvcHtmlString(html));
+                }
+            }
+            catch
+            {
+                Response.StatusCode = 500;
+                Response.StatusDescription = "Unable to retrieve data from Meetup.com";
+                return null;
+            }
+
+        }
+
+        public PartialViewResult MeetupProfile()
+        {
+            return PartialView();
+        }
     }
 }

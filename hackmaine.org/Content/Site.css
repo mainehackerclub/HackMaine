@@ -385,6 +385,10 @@ aside {
             padding: 2px 0 2px 20px;
         }
 
+    aside.first {
+        margin-top: 10px;
+    }
+
 .label {
     font-weight: 700;
 }
