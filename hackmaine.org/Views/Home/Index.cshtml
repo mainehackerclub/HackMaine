@@ -142,20 +142,21 @@
 
     </ol>
 </article>
+@{
+    IEnumerable<ImageInfo> Images=ViewBag.Images;
+    if (Images != null && Images.Count() > 0)
+    {
 <aside>
     <h3>Previous Meetups</h3>
     <div class="gallery vertical">
         <ul>
-            <li><a class="fancybox" rel="" href="~/Images/meetups/20120724_01.jpg">
-                <img title="24th Jul 2012: Hacking Arduino via Sketch IDE." src="~/Images/meetups/20120724_01t.jpg" /></a></li>
-            <li><a class="fancybox" rel="" href="~/Images/meetups/20120724_02.jpg">
-                <img title="24th Jul 2012: Grokking memory corruption security exploits." src="~/Images/meetups/20120724_02t.jpg" /></a></li>
-            <li><a class="fancybox" rel="" href="~/Images/meetups/20120918_01.jpg">
-                <img title="18th Sep 2012: Denis takes us through a “Electrical Circuits 101” " src="~/Images/meetups/20120918_01t.jpg" /></a></li>
-            <li><a class="fancybox" rel="" href="~/Images/meetups/20121002_01.jpg">
-                <img title="2nd Oct 2012: Check out the nerd joy on @("@")zacheryschiller" src="~/Images/meetups/20121002_01t.jpg" /></a></li>
-            <li><a class="fancybox" rel="" href="~/Images/meetups/20121002_02.jpg">
-                <img title="2nd Oct 2012: Join us for some hardware hacking." src="~/Images/meetups/20121002_02t.jpg" /></a></li>
+        @foreach(var image in Images)
+        {
+            <li><a class="fancybox" rel="" href="@Html.Raw(image.FullURL)">
+                <img title="@if(image.Date.HasValue){ @image.Date.Value.ToDateString()<text>:  </text>}@Html.Encode(image.Title)" src="@Html.Raw(image.ThumbURL)" /></a></li>
+        }
         </ul>
     </div>
 </aside>
+    }
+}
