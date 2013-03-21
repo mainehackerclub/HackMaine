@@ -37,7 +37,7 @@ namespace hackmaine.org.Controllers
                 new EventSchedule[]{ 
                     new EventSchedule( MDMInfo, new DateTime(2013, 3, 13, 17, 0, 0), TimeSpan.FromHours(4.0), EventSchedule.RepeatType.None),
                     new EventSchedule( MDMInfo, new DateTime(2013, 1, 8, 18, 0 ,0), TimeSpan.FromHours(3.0), EventSchedule.RepeatType.BiWeekly),
-                    new EventSchedule( BAMInfo, new DateTime(2013, 3, 27, 18, 0 ,0), TimeSpan.FromHours(3.0), EventSchedule.RepeatType.BiWeekly)
+                    new EventSchedule( MDMInfo, new DateTime(2013, 3, 27, 17, 0 ,0), TimeSpan.FromHours(3.0), EventSchedule.RepeatType.BiWeekly)
                 }),
             new EventInfo(Guid.Parse("ed70d17e-dffb-4f4b-8c4b-16e6573a1c93"), "Hack Day", "Our first day of hacking.",
                 new EventSchedule[]{ new EventSchedule( UnitedWayInfo, new DateTime(2013, 3, 9, 9, 30, 0), new DateTime(2013, 3, 9, 16, 0, 0), EventSchedule.RepeatType.None)}

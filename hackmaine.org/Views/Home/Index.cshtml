@@ -67,7 +67,7 @@
 }
 <article>
     <p>
-        The group is targeted toward technical enthusiasts in the area of Maine roughly around the following towns:  Bangor & Monroe.
+        The group is targeted toward technical enthusiasts in central and northern Maine.
         We welcome any and all technical interests whether you're into software, hardware, networking, or mobile app development.  
     </p>
 
@@ -154,9 +154,6 @@
 *@
     </ol>
 </article>
-<aside class="first">
-    @Html.Partial("MeetupProfile")
-</aside>
 @{
     IEnumerable<ImageInfo> Images=ViewBag.Images;
     if (Images != null && Images.Count() > 0)
@@ -176,6 +173,9 @@
 </aside>
     }
 }
+<aside class="meetupaside">
+    @Html.Partial("MeetupProfile")
+</aside>
 <article id="nextMeeting">
     <h3>Upcoming Meetup</h3>
     <div id="nextMeetup"></div>
