@@ -252,6 +252,10 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\derrick\sig.jpg" />
+    <Content Include="Images\derrick\sig2.jpg" />
+    <Content Include="Images\meetups\20130309_02.jpg" />
+    <Content Include="Images\meetups\20130309_02t.jpg" />
     <Content Include="Images\rss.png" />
     <Content Include="Mvc.sitemap" />
     <None Include="MvcSiteMapSchema.xsd">

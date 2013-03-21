@@ -64,7 +64,8 @@ namespace hackmaine.org.Controllers
             new ImageInfo() { Date=new DateTime(2013,2,5), Title="Checking out some exhibits", ThumbURL="/Images/meetups/20130205_02t.jpg", FullURL="/Images/meetups/20130205_02.jpg"},
             new ImageInfo() { Date=new DateTime(2013,3,5), Title="Drawing stuff", ThumbURL="/Images/meetups/20130305_01t.jpg", FullURL="/Images/meetups/20130305_01.jpg"},
             new ImageInfo() { Date=new DateTime(2013,3,5), Title="Aaron does some plumbing", ThumbURL="/Images/meetups/20130305_02t.jpg", FullURL="/Images/meetups/20130305_02.jpg"},
-            new ImageInfo() { Date=new DateTime(2013,3,9), Title="First Hack Day", ThumbURL="/Images/meetups/20130309_01t.jpg", FullURL="/Images/meetups/20130309_01.jpg"},
+            new ImageInfo() { Date=new DateTime(2013,3,9), Title="First Hack Day: 1", ThumbURL="/Images/meetups/20130309_01t.jpg", FullURL="/Images/meetups/20130309_01.jpg"},
+            new ImageInfo() { Date=new DateTime(2013,3,9), Title="First Hack Day: 2", ThumbURL="/Images/meetups/20130309_02t.jpg", FullURL="/Images/meetups/20130309_02.jpg"},
         };
 
         public ActionResult Index()
