@@ -14,6 +14,11 @@ namespace hackmaine.org.Controllers
 
     public class HomeController : BaseController
     {
+        public ActionResult SiteMapXml()
+        {
+            return new MvcSiteMapProvider.Web.XmlSiteMapResult();
+        }
+        
         public static readonly VenueInfo BAMInfo =
             new VenueInfo("Books-A-Million", "near the Bangor Mall in Bangor", "116 Bangor Mall Blvd.", "Bangor")
         {
@@ -97,12 +102,12 @@ namespace hackmaine.org.Controllers
             return null;
         }
 
-        //public ActionResult About()
-        //{
-        //    ViewBag.Message = "Your app description page.";
+        public ActionResult About()
+        {
+            ViewBag.Message = "What is the Maine Hacker Club?";
 
-        //    return View();
-        //}
+            return View();
+        }
 
         //public ActionResult Contact()
         //{
