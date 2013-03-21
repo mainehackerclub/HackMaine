@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewBag.Title = "About Us";
 }
 
 <hgroup class="title">
@@ -9,26 +9,33 @@
 
 <article>
     <p>
-        Use this area to provide additional information.
+        <img src="~/Images/meetups/20130108_01.jpg" style="width:600px;" title="A Hacker Club meeting in January 2013 at Books-A-Million in Bangor, ME." />
     </p>
 
     <p>
-        Use this area to provide additional information.
+        The Maine Hacker Club is a group of technology enthusiasts and do-it-yourselfers in central and northern Maine.
     </p>
 
     <p>
-        Use this area to provide additional information.
+        We get together every week or so at various locations. Most recently we've been meeting at the Maine Discovery museum in Bangor 
+        weekly on alternating Tuesdays and Wednesdays. Check the @Html.ActionLink("Home Page", "Index", "Home", null, new { title="Upcoming hacker meetings" }) for upcoming dates.
     </p>
+
+    <p>
+        If you are a hacker, or hacker-curious please stop by our next meeting and say hi, there's not much structure to the meet-up's; 
+        but it's a great chance to meet some local people with similar interests!
+    </p>
+    <br /><br /><br />
 </article>
 
+<aside class="meetupaside">
+    @Html.Partial("MeetupProfile")
+</aside>
 <aside>
-    <h3>Aside Title</h3>
-    <p>
-        Use this area to provide additional information.
-    </p>
+    <h3>Site Links</h3>
     <ul>
-        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-        <li>@Html.ActionLink("About", "About", "Home")</li>
-        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+        <li>@Html.ActionLink("Home", "Index", "Home", null, new { title="Home Page" })</li>
+        <li>@Html.ActionLink("About", "About", "Home", null, new { title="About The Maine Hacker Club" })</li>
+        <li><a href="/forums/" title="Visit the Hack Maine Forums...">Forums</a></li>
     </ul>
 </aside>

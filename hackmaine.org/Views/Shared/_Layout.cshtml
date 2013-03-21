@@ -8,7 +8,7 @@
         <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-iphone-114.png" />
         <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-ipad-144.png" />
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <link rel="alternate" type="application/rss+xml" title="Maine Hacker Forum Feed" href="http://www.hackmaine.org/forums/gymrss.php" />
+        <link rel="alternate" type="application/rss+xml" title="Maine Hacker Forum Feed" href="@hackmaine.org.Controllers.BaseController.rss_forums_All" />
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
@@ -26,9 +26,9 @@
                     <nav>
                         <ul id="menu">
                             <li>@Html.ActionLink("Home", "Index", "Home", null, new { title = "Maine Hacker Home" })</li>
-                            <li><a href="/forums" title="Maine Hacker Forums">Forums</a></li>
-@*                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+@*                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                            <li><a href="/forums" title="Maine Hacker Forums">Forums</a><a title="Forums: Active Topics Feed" class="rss" href="@hackmaine.org.Controllers.BaseController.rss_forums_Active">RSS</a></li>
                         </ul>
                     </nav>
                 </div>

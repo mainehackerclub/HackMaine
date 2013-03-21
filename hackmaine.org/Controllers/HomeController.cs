@@ -14,6 +14,11 @@ namespace hackmaine.org.Controllers
 
     public class HomeController : BaseController
     {
+        public ActionResult SiteMapXml()
+        {
+            return new MvcSiteMapProvider.Web.XmlSiteMapResult();
+        }
+        
         public static readonly VenueInfo BAMInfo =
             new VenueInfo("Books-A-Million", "near the Bangor Mall in Bangor", "116 Bangor Mall Blvd.", "Bangor")
         {
@@ -37,7 +42,7 @@ namespace hackmaine.org.Controllers
                 new EventSchedule[]{ 
                     new EventSchedule( MDMInfo, new DateTime(2013, 3, 13, 17, 0, 0), TimeSpan.FromHours(4.0), EventSchedule.RepeatType.None),
                     new EventSchedule( MDMInfo, new DateTime(2013, 1, 8, 18, 0 ,0), TimeSpan.FromHours(3.0), EventSchedule.RepeatType.BiWeekly),
-                    new EventSchedule( BAMInfo, new DateTime(2013, 3, 27, 18, 0 ,0), TimeSpan.FromHours(3.0), EventSchedule.RepeatType.BiWeekly)
+                    new EventSchedule( MDMInfo, new DateTime(2013, 3, 27, 17, 0 ,0), TimeSpan.FromHours(3.0), EventSchedule.RepeatType.BiWeekly)
                 }),
             new EventInfo(Guid.Parse("ed70d17e-dffb-4f4b-8c4b-16e6573a1c93"), "Hack Day", "Our first day of hacking.",
                 new EventSchedule[]{ new EventSchedule( UnitedWayInfo, new DateTime(2013, 3, 9, 9, 30, 0), new DateTime(2013, 3, 9, 16, 0, 0), EventSchedule.RepeatType.None)}
@@ -59,7 +64,8 @@ namespace hackmaine.org.Controllers
             new ImageInfo() { Date=new DateTime(2013,2,5), Title="Checking out some exhibits", ThumbURL="/Images/meetups/20130205_02t.jpg", FullURL="/Images/meetups/20130205_02.jpg"},
             new ImageInfo() { Date=new DateTime(2013,3,5), Title="Drawing stuff", ThumbURL="/Images/meetups/20130305_01t.jpg", FullURL="/Images/meetups/20130305_01.jpg"},
             new ImageInfo() { Date=new DateTime(2013,3,5), Title="Aaron does some plumbing", ThumbURL="/Images/meetups/20130305_02t.jpg", FullURL="/Images/meetups/20130305_02.jpg"},
-            new ImageInfo() { Date=new DateTime(2013,3,9), Title="First Hack Day", ThumbURL="/Images/meetups/20130309_01t.jpg", FullURL="/Images/meetups/20130309_01.jpg"},
+            new ImageInfo() { Date=new DateTime(2013,3,9), Title="First Hack Day: 1", ThumbURL="/Images/meetups/20130309_01t.jpg", FullURL="/Images/meetups/20130309_01.jpg"},
+            new ImageInfo() { Date=new DateTime(2013,3,9), Title="First Hack Day: 2", ThumbURL="/Images/meetups/20130309_02t.jpg", FullURL="/Images/meetups/20130309_02.jpg"},
         };
 
         public ActionResult Index()
@@ -97,12 +103,12 @@ namespace hackmaine.org.Controllers
             return null;
         }
 
-        //public ActionResult About()
-        //{
-        //    ViewBag.Message = "Your app description page.";
+        public ActionResult About()
+        {
+            ViewBag.Message = "What is the Maine Hacker Club?";
 
-        //    return View();
-        //}
+            return View();
+        }
 
         //public ActionResult Contact()
         //{
