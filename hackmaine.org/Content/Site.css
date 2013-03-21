@@ -364,6 +364,24 @@ ol.round {
             background: url("../Images/orderedList9.png") no-repeat;
         }
 
+/* RSS feed */
+a.rss {
+	display: block;
+	float: right;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	margin: 0;
+	padding: 18px 0 0 18px;
+	background: transparent none 0 0 no-repeat;
+    background-image: url(/Images/rss.png) !important;
+    margin-left:4px;
+    margin-top:4px;
+}
+a.rss:hover {
+	background-position: 0 -20px !important;
+}
+
 /* content */
 article {
     float: left;
